@@ -5,19 +5,19 @@ module Kairos
       class FaceError < StandardError; end
 
       API_METHODS = {
-        :detect => 'http://api.kairos.io/detect',
-        :enroll => 'http://api.kairos.io/entroll',
-        :recognize => 'http://api.kairos.io/recognize',
-        :gallery_list_all => 'http://api.kairos.io/gallery/list_all',
-        :gallery_view => 'http://api.kairos.io/gallery/view',
-        :gallery_remove_subject => 'http://api.kairos.io/gallery/remove_subject',
+        :detect => 'http://api.kairos.com/detect',
+        :enroll => 'http://api.kairos.com/entroll',
+        :recognize => 'http://api.kairos.com/recognize',
+        :gallery_list_all => 'http://api.kairos.com/gallery/list_all',
+        :gallery_view => 'http://api.kairos.com/gallery/view',
+        :gallery_remove_subject => 'http://api.kairos.com/gallery/remove_subject',
       }
 
       def api_crendential
         { :app_id => app_id, :app_key => app_key }
       end
 
-      def make_request(api_method, opts={})        
+      def make_request(api_method, opts={})
         response = JSON.parse( RestClient::Request.execute(
           :method => :post,
           :url => API_METHODS[ api_method ],
@@ -27,7 +27,7 @@ module Kairos
           },
           :payload => opts.to_json
         ))
-        
+
         # if %w/success partial/.include?(response['status'])
         return response
         # elsif response['status'] == 'failure'
